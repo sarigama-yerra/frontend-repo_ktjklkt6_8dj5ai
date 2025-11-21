@@ -1,4 +1,5 @@
 import { PieChart, ClipboardList, CalendarClock, Boxes, LayoutDashboard } from "lucide-react";
+import Reveal from "./Reveal";
 
 const features = [
   {
@@ -32,18 +33,24 @@ export default function Features() {
   return (
     <section className="bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 py-20">
-        <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">How it works</h2>
-        <p className="mt-3 text-slate-600 max-w-2xl">Restaurant logs in → sets up menu → starts tracking → insights. Built for simplicity from day one.</p>
+        <Reveal direction="up">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">How it works</h2>
+        </Reveal>
+        <Reveal direction="right">
+          <p className="mt-3 text-slate-600 max-w-2xl">Restaurant logs in → sets up menu → starts tracking → insights. Built for simplicity from day one.</p>
+        </Reveal>
 
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map(({ icon: Icon, title, description }) => (
-            <div key={title} className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-              <div className="h-10 w-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-100">
-                <Icon className="h-5 w-5" />
+          {features.map(({ icon: Icon, title, description }, i) => (
+            <Reveal key={title} direction={i % 3 === 0 ? 'left' : i % 3 === 1 ? 'up' : 'right'}>
+              <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="h-10 w-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-100">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 text-lg font-medium text-slate-900">{title}</h3>
+                <p className="mt-2 text-slate-600 text-sm">{description}</p>
               </div>
-              <h3 className="mt-4 text-lg font-medium text-slate-900">{title}</h3>
-              <p className="mt-2 text-slate-600 text-sm">{description}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
